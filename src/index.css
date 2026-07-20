@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-paper: #F3F5F7;
+  --color-paper-alt: #EAEDF1;
+  --color-surface: #FFFFFF;
+  --color-ink: #1B2A4A;
+  --color-ink-soft: #2B2E33;
+  --color-muted: #6B7280;
+  --color-red: #B23A2E;
+  --color-red-soft: #F1DAD7;
+  --color-sage: #4B7A63;
+  --color-border: #D8DCE2;
+
+  /* Constant brand surface — a deliberate deep-ink block that stays the
+     same regardless of light/dark mode (logo mark, CTA band). */
+  --color-ink-surface: #1B2A4A;
+
+  --nav-bg: rgba(243, 245, 247, 0.85);
+  --shadow-card: 0 12px 32px rgba(27, 42, 74, 0.08);
+  --shadow-hover: 0 10px 24px rgba(27, 42, 74, 0.08);
+
+  --font-display: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-sm: 4px;
+  --radius: 6px;
+  --radius-lg: 10px;
+}
+
+[data-theme='dark'] {
+  --color-paper: #14181F;
+  --color-paper-alt: #1B2029;
+  --color-surface: #1E2430;
+  --color-ink: #F3F5F7;
+  --color-ink-soft: #C9CDD3;
+  --color-muted: #8A93A0;
+  --color-red: #E2665B;
+  --color-red-soft: rgba(226, 102, 91, 0.22);
+  --color-sage: #6FA98D;
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  --nav-bg: rgba(20, 24, 31, 0.85);
+  --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-hover: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink-soft);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-red-soft);
+  color: var(--color-ink);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
