@@ -95,31 +95,41 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
   return (
     <Box className="generator-shell">
       <Box component="nav" className="generator-nav">
-        <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5 }}>
-          <Button onClick={onBack} size="small">
+        <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5, gap: 1 }}>
+          <Button onClick={onBack} size="small" sx={{ flexShrink: 0 }}>
             ← Back
           </Button>
-          <Stack direction="row" alignItems="center" spacing={1.25}>
-            <Box component="img" src={logo} alt="" sx={{ width: 24, height: 24, borderRadius: '5px', display: 'block' }} />
-            <Typography sx={{ fontFamily: 'var(--font-display)', fontSize: '0.9rem', color: 'var(--color-ink)' }}>
+          <Stack direction="row" alignItems="center" spacing={1.25} sx={{ minWidth: 0 }}>
+            <Box component="img" src={logo} alt="" sx={{ width: 24, height: 24, borderRadius: '5px', display: 'block', flexShrink: 0 }} />
+            <Typography
+              noWrap
+              sx={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.9rem',
+                color: 'var(--color-ink)',
+                display: { xs: 'none', sm: 'block' },
+              }}
+            >
               smart-email-assistant
             </Typography>
           </Stack>
-          <ThemeToggle mode={themeMode} onToggle={onToggleMode} />
+          <Box sx={{ flexShrink: 0 }}>
+            <ThemeToggle mode={themeMode} onToggle={onToggleMode} />
+          </Box>
         </Container>
       </Box>
 
-      <Container maxWidth="md" sx={{ py: { xs: 5, md: 8 } }}>
-        <Typography variant="h1" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, mb: 1 }}>
+      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
+        <Typography variant="h1" sx={{ fontSize: { xs: '1.35rem', sm: '1.65rem', md: '1.9rem' }, mb: 1 }}>
           {mode === 'compose' ? 'Compose an email' : 'Generate a reply'}
         </Typography>
-        <Typography sx={{ color: 'var(--color-muted)', mb: 3 }}>
+        <Typography sx={{ color: 'var(--color-muted)', mb: 3, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
           {mode === 'compose'
             ? 'Fill in the recipient and subject, and get a draft you can send.'
             : 'Paste the email below, pick a tone if you want one, and get a draft you can send.'}
         </Typography>
 
-        <Tabs value={mode} onChange={handleModeChange} sx={{ mb: 3 }}>
+        <Tabs value={mode} onChange={handleModeChange} variant="fullWidth" sx={{ mb: 3 }}>
           <Tab value="reply" label="Reply" />
           <Tab value="compose" label="Compose" />
         </Tabs>
@@ -183,7 +193,7 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
             </Select>
           </FormControl>
 
-          <Stack direction="row" spacing={2}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Button
               variant="contained"
               color="secondary"
@@ -200,7 +210,7 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
               )}
             </Button>
             {(emailContent || recipientEmail || subject || additionalContext || generatedReply) && !loading && (
-              <Button variant="text" onClick={handleReset}>
+              <Button variant="text" onClick={handleReset} sx={{ width: { xs: '100%', sm: 'auto' }, flexShrink: 0 }}>
                 Clear
               </Button>
             )}
@@ -228,7 +238,7 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
                 slotProps={{ input: { readOnly: true } }}
                 sx={{ mb: 2 }}
               />
-              <Button variant="outlined" onClick={handleCopy}>
+              <Button variant="outlined" onClick={handleCopy} sx={{ width: { xs: '100%', sm: 'auto' } }}>
                 Copy to clipboard
               </Button>
             </Box>

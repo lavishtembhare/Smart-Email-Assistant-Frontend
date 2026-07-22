@@ -74,14 +74,22 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
   return (
     <Box>
       <Box component="nav" className="nav-bar">
-        <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5 }}>
-          <Stack direction="row" alignItems="center" spacing={1.25}>
-            <Box component="img" src={logo} alt="" className="nav-mark" />
-            <Typography sx={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: 'var(--color-ink)' }}>
+        <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5, gap: 1 }}>
+          <Stack direction="row" alignItems="center" spacing={{ xs: 0.75, sm: 1.25 }} sx={{ minWidth: 0 }}>
+            <Box component="img" src={logo} alt="" className="nav-mark" sx={{ flexShrink: 0 }} />
+            <Typography
+              noWrap
+              sx={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '0.95rem',
+                color: 'var(--color-ink)',
+                display: { xs: 'none', sm: 'block' },
+              }}
+            >
               smart-email-assistant
             </Typography>
           </Stack>
-          <Stack direction="row" alignItems="center" spacing={1}>
+          <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1 }} sx={{ flexShrink: 0 }}>
             <ThemeToggle mode={mode} onToggle={onToggleMode} />
             <Button
               component="a"
@@ -101,18 +109,24 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ pt: { xs: 6, md: 10 }, pb: { xs: 8, md: 12 } }}>
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 6, md: 5 }, alignItems: 'center' }}>
-          <Box sx={{ flex: '1 1 50%' }}>
+      <Container maxWidth="lg" sx={{ pt: { xs: 5, sm: 7, md: 10 }, pb: { xs: 7, sm: 9, md: 12 } }}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, sm: 6, md: 5 }, alignItems: 'center' }}>
+          <Box sx={{ flex: '1 1 50%', width: '100%' }}>
             <Typography className="eyebrow">draft → reply</Typography>
-            <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '2.7rem' }, lineHeight: 1.15, mb: 3 }}>
+            <Typography variant="h1" sx={{ fontSize: { xs: '1.9rem', sm: '2.3rem', md: '2.7rem' }, lineHeight: 1.15, mb: 3 }}>
               Turn any email into the reply you'd actually send.
             </Typography>
-            <Typography sx={{ color: 'var(--color-muted)', fontSize: '1.05rem', maxWidth: 460, mb: 4 }}>
+            <Typography sx={{ color: 'var(--color-muted)', fontSize: { xs: '1rem', md: '1.05rem' }, maxWidth: 460, mb: 4 }}>
               Paste in what landed in your inbox, pick a tone, and get a clean, ready-to-send draft in seconds.
               No blank cursor, no re-reading it five times.
             </Typography>
-            <Button variant="contained" color="secondary" size="large" onClick={onGetStarted}>
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              onClick={onGetStarted}
+              sx={{ width: { xs: '100%', sm: 'auto' } }}
+            >
               Try it free
             </Button>
           </Box>
@@ -133,9 +147,15 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Box>
       </Container>
 
-      <Box sx={{ background: 'var(--color-paper-alt)', py: { xs: 8, md: 10 } }}>
+      <Box sx={{ background: 'var(--color-paper-alt)', py: { xs: 7, sm: 8, md: 10 } }}>
         <Container maxWidth="lg">
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+              gap: { xs: 3, sm: 4 },
+            }}
+          >
             {features.map(({ icon: Icon, title, body }) => (
               <Box key={title} className="feature-card">
                 <Icon className="feature-icon" />
@@ -151,14 +171,20 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 7, sm: 9, md: 12 } }}>
         <Typography className="eyebrow" sx={{ textAlign: 'center' }}>
           the process
         </Typography>
-        <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '1.9rem' }, textAlign: 'center', mb: 6 }}>
+        <Typography variant="h2" sx={{ fontSize: { xs: '1.4rem', sm: '1.7rem', md: '1.9rem' }, textAlign: 'center', mb: { xs: 4, md: 6 } }}>
           How it works
         </Typography>
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
+            gap: { xs: 3, sm: 4 },
+          }}
+        >
           {steps.map((step) => (
             <Box key={step.n} className="step-card">
               <Typography className="step-number">{step.n}</Typography>
@@ -173,15 +199,15 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Box>
       </Container>
 
-      <Box id="extension" sx={{ background: 'var(--color-paper-alt)', py: { xs: 8, md: 10 } }}>
+      <Box id="extension" sx={{ background: 'var(--color-paper-alt)', py: { xs: 7, sm: 8, md: 10 } }}>
         <Container maxWidth="lg">
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, md: 6 }, alignItems: 'center' }}>
             <Box sx={{ flex: '1 1 55%' }}>
               <Typography className="eyebrow">also available</Typography>
-              <Typography variant="h2" sx={{ fontSize: { xs: '1.6rem', md: '2rem' }, mb: 2 }}>
+              <Typography variant="h2" sx={{ fontSize: { xs: '1.45rem', sm: '1.7rem', md: '2rem' }, mb: 2 }}>
                 Works right inside Gmail.
               </Typography>
-              <Typography sx={{ color: 'var(--color-muted)', fontSize: '1.05rem', maxWidth: 460, mb: 3 }}>
+              <Typography sx={{ color: 'var(--color-muted)', fontSize: { xs: '1rem', md: '1.05rem' }, maxWidth: 460, mb: 3 }}>
                 Install the Chrome extension and a single "AI Reply" button appears in Gmail's compose
                 toolbar. No switching tabs, no copy-pasting between windows. Not on the Chrome Web
                 Store yet — it's a quick manual install, three steps below.
@@ -194,6 +220,7 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
                 color="secondary"
                 size="large"
                 startIcon={<ExtensionIcon />}
+                sx={{ width: { xs: '100%', sm: 'auto' } }}
               >
                 Download extension (.zip)
               </Button>
@@ -202,7 +229,7 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
             <Box sx={{ flex: '1 1 45%', width: '100%' }}>
               <Box className="redline-card">
                 <Box className="redline-card-head">Compose — Re: quarterly numbers</Box>
-                <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
                   <Box className="mock-toolbar-button">
                     <ExtensionIcon />
                     <span>AI Reply</span>
@@ -233,17 +260,23 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
       </Box>
 
       <Box className="cta-band">
-        <Container maxWidth="md" sx={{ textAlign: 'center', py: { xs: 8, md: 10 } }}>
-          <Typography variant="h2" sx={{ fontSize: { xs: '1.5rem', md: '2rem' }, color: '#FFFFFF', mb: 3 }}>
+        <Container maxWidth="md" sx={{ textAlign: 'center', py: { xs: 7, sm: 8, md: 10 } }}>
+          <Typography variant="h2" sx={{ fontSize: { xs: '1.4rem', sm: '1.7rem', md: '2rem' }, color: '#FFFFFF', mb: 3 }}>
             Stop staring at the cursor.
           </Typography>
-          <Button variant="contained" color="secondary" size="large" onClick={onGetStarted}>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            onClick={onGetStarted}
+            sx={{ width: { xs: '100%', sm: 'auto' } }}
+          >
             Open the generator
           </Button>
         </Container>
       </Box>
 
-      <Box component="footer" sx={{ py: 4, textAlign: 'center' }}>
+      <Box component="footer" sx={{ py: 4, px: 2, textAlign: 'center' }}>
         <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
           Smart Email Assistant — built to get you out of your inbox faster.
         </Typography>
