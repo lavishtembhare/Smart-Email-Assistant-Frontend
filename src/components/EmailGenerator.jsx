@@ -17,9 +17,16 @@ import Tab from '@mui/material/Tab'
 import ThemeToggle from './ThemeToggle.jsx'
 import logo from '../assets/logo.svg'
 
-const API_GENERATE_URL = 'http://localhost:8080/api/email/generate'
-const API_COMPOSE_URL = 'http://localhost:8080/api/email/compose'
+// Centralized API config. Values come from Vite env vars (see .env.example)
+// so the same code can point at different backends per environment.
+export const API_GENERATE_URL = import.meta.env.VITE_API_GENERATE_URL
+export const API_COMPOSE_URL = import.meta.env.VITE_API_COMPOSE_URL
 
+if (!API_GENERATE_URL || !API_COMPOSE_URL) {
+  console.warn(
+    'Missing VITE_API_GENERATE_URL / VITE_API_COMPOSE_URL — check your .env file.'
+  )
+}
 export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }) {
   const [mode, setMode] = useState('reply') // 'reply' | 'compose'
 
