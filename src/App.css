@@ -13,13 +13,7 @@
   width: 28px;
   height: 28px;
   border-radius: var(--radius);
-  background: var(--color-ink-surface);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+  display: block;
   flex-shrink: 0;
 }
 
@@ -97,6 +91,20 @@
 
 .feature-icon {
   color: var(--color-red);
+}
+
+.mock-toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-red);
+  color: var(--color-red);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .step-card {

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import ThemeToggle from './ThemeToggle.jsx'
+import logo from '../assets/logo.svg'
 
 function NibIcon(props) {
   return (
@@ -27,6 +28,14 @@ function SendIcon(props) {
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M3 11.5 20 4l-7 17-3-7-7-2.5Z" />
+    </svg>
+  )
+}
+
+function ExtensionIcon(props) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M9 4h4a1 1 0 0 1 1 1v2.2a1.8 1.8 0 1 0 0 3.6V13a1 1 0 0 1-1 1h-2.2a1.8 1.8 0 1 1-3.6 0H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2.2a1.8 1.8 0 1 0 3.6 0V5a1 1 0 0 1 1-1Z" />
     </svg>
   )
 }
@@ -55,19 +64,36 @@ const steps = [
   { n: '03', title: 'Copy the reply', body: 'Read it once, send it, or adjust a line and move on.' },
 ]
 
+const installSteps = [
+  { n: '01', title: 'Download the extension', body: 'Get the .zip above and unzip it anywhere on your computer.' },
+  { n: '02', title: 'Open chrome://extensions', body: 'Turn on Developer mode using the toggle in the top right.' },
+  { n: '03', title: 'Click "Load unpacked"', body: 'Select the unzipped folder. The AI button appears in Gmail.' },
+]
+
 export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
   return (
     <Box>
       <Box component="nav" className="nav-bar">
         <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5 }}>
           <Stack direction="row" alignItems="center" spacing={1.25}>
-            <Box className="nav-mark">@</Box>
+            <Box component="img" src={logo} alt="" className="nav-mark" />
             <Typography sx={{ fontFamily: 'var(--font-display)', fontSize: '0.95rem', color: 'var(--color-ink)' }}>
               smart-email-assistant
             </Typography>
           </Stack>
           <Stack direction="row" alignItems="center" spacing={1}>
             <ThemeToggle mode={mode} onToggle={onToggleMode} />
+            <Button
+              component="a"
+              href="#extension"
+              variant="text"
+              color="primary"
+              size="small"
+              startIcon={<ExtensionIcon />}
+              sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+            >
+              Chrome extension
+            </Button>
             <Button variant="outlined" color="primary" onClick={onGetStarted} size="small">
               Open app
             </Button>
@@ -146,6 +172,65 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
           ))}
         </Box>
       </Container>
+
+      <Box id="extension" sx={{ background: 'var(--color-paper-alt)', py: { xs: 8, md: 10 } }}>
+        <Container maxWidth="lg">
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, md: 6 }, alignItems: 'center' }}>
+            <Box sx={{ flex: '1 1 55%' }}>
+              <Typography className="eyebrow">also available</Typography>
+              <Typography variant="h2" sx={{ fontSize: { xs: '1.6rem', md: '2rem' }, mb: 2 }}>
+                Works right inside Gmail.
+              </Typography>
+              <Typography sx={{ color: 'var(--color-muted)', fontSize: '1.05rem', maxWidth: 460, mb: 3 }}>
+                Install the Chrome extension and a single "AI Reply" button appears in Gmail's compose
+                toolbar. No switching tabs, no copy-pasting between windows. Not on the Chrome Web
+                Store yet — it's a quick manual install, three steps below.
+              </Typography>
+              <Button
+                component="a"
+                href="/smart-email-assistant-extension.zip"
+                download
+                variant="contained"
+                color="secondary"
+                size="large"
+                startIcon={<ExtensionIcon />}
+              >
+                Download extension (.zip)
+              </Button>
+            </Box>
+
+            <Box sx={{ flex: '1 1 45%', width: '100%' }}>
+              <Box className="redline-card">
+                <Box className="redline-card-head">Compose — Re: quarterly numbers</Box>
+                <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                  <Box className="mock-toolbar-button">
+                    <ExtensionIcon />
+                    <span>AI Reply</span>
+                  </Box>
+                  <Box sx={{ width: 22, height: 22, borderRadius: '50%', border: '1.5px solid var(--color-border)' }} />
+                  <Box sx={{ width: 22, height: 22, borderRadius: '50%', border: '1.5px solid var(--color-border)' }} />
+                </Box>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box sx={{ mt: { xs: 6, md: 8 }, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
+            {installSteps.map((step) => (
+              <Box key={step.n} className="step-card">
+                <Typography className="step-number" sx={{ fontSize: '1.5rem' }}>
+                  {step.n}
+                </Typography>
+                <Typography variant="h4" sx={{ fontSize: '0.95rem', mb: 0.5 }}>
+                  {step.title}
+                </Typography>
+                <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
+                  {step.body}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Container>
+      </Box>
 
       <Box className="cta-band">
         <Container maxWidth="md" sx={{ textAlign: 'center', py: { xs: 8, md: 10 } }}>
