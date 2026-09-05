@@ -6,12 +6,10 @@ import EmailGenerator from './components/EmailGenerator.jsx'
 import { getTheme } from './theme.js'
 import './App.css'
 
-function App() {
+export default function App() {
   const [view, setView] = useState('landing') // 'landing' | 'app'
-  const [mode, setMode] = useState('dark') // 'light' | 'dark'
+  const [mode, setMode] = useState('dark')
 
-  // useLayoutEffect (not useEffect) so the data-theme attribute is set
-  // before the browser paints, avoiding a flash of the other mode.
   useLayoutEffect(() => {
     document.documentElement.setAttribute('data-theme', mode)
   }, [mode])
@@ -29,5 +27,3 @@ function App() {
     </ThemeProvider>
   )
 }
-
-export default App

@@ -1,7 +1,63 @@
-<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smart Email Assistant logo">
-  <rect width="32" height="32" rx="7" fill="#1B2A4A"/>
-  <rect x="6" y="9" width="20" height="14" rx="1.5" fill="none" stroke="#F3F5F7" stroke-width="1.8"/>
-  <path d="M7 10.5 L16 18 L25 10.5" fill="none" stroke="#F3F5F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="25" cy="23" r="6" fill="#B23A2E" stroke="#1B2A4A" stroke-width="2"/>
-  <path d="M22.3 23.2 L24.3 25.2 L28 20.5" fill="none" stroke="#F3F5F7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI Email Assistant Logo">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#050811" />
+    </linearGradient>
+
+    <!-- Glowing Border Gradient -->
+    <linearGradient id="border-glow" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#C084FC" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.7" />
+    </linearGradient>
+
+    <!-- AI Core Gradient -->
+    <linearGradient id="spark-grad" x1="14" y1="8" x2="34" y2="28" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="45%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#C084FC" />
+    </linearGradient>
+
+    <!-- Envelope Plate Gradient -->
+    <linearGradient id="envelope-grad" x1="8" y1="20" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Soft Ambient Glow -->
+    <filter id="ambient-glow" x="10" y="4" width="28" height="28" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Base Squircle Container -->
+  <rect width="48" height="48" rx="13" fill="url(#bg-grad)" />
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="12.25" stroke="url(#border-glow)" stroke-width="1.5" />
+
+  <!-- Background Orbit Ring (Synaptic Arc) -->
+  <ellipse cx="24" cy="20" rx="13" ry="5.5" transform="rotate(-15 24 20)" stroke="url(#spark-grad)" stroke-width="1.2" stroke-dasharray="3 3" opacity="0.65" />
+
+  <!-- Envelope Lower Shell -->
+  <path d="M9 22.5C9 20.5 10.5 19 12.5 19H35.5C37.5 19 39 20.5 39 22.5V33.5C39 36 37 38 34.5 38H13.5C11 38 9 36 9 33.5V22.5Z" fill="url(#envelope-grad)" stroke="#334155" stroke-width="1.2" />
+
+  <!-- Envelope Inner Fold Lines -->
+  <path d="M10 21L24 30.5L38 21" stroke="#475569" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6" />
+  <path d="M10 36L20 28" stroke="#334155" stroke-width="1.2" stroke-linecap="round" />
+  <path d="M38 36L28 28" stroke="#334155" stroke-width="1.2" stroke-linecap="round" />
+
+  <!-- Rising AI Neural Core (Ascending Intelligence Spark) -->
+  <g filter="url(#ambient-glow)">
+    <!-- 4-Point AI Intelligence Star -->
+    <path d="M24 8C24 13.5 28.5 18 34 18C28.5 18 24 22.5 24 28C24 22.5 19.5 18 14 18C19.5 18 24 13.5 24 8Z" fill="url(#spark-grad)" />
+    <!-- Bright Central Singularity -->
+    <circle cx="24" cy="18" r="2.2" fill="#FFFFFF" />
+  </g>
+
+  <!-- Micro Neural Spark Nodes -->
+  <circle cx="36" cy="11" r="1.5" fill="#38BDF8" />
+  <circle cx="12" cy="14" r="1" fill="#C084FC" />
+  <circle cx="37" cy="27" r="1" fill="#818CF8" />
 </svg>

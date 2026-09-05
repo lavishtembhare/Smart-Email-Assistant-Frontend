@@ -14,30 +14,27 @@ import Snackbar from '@mui/material/Snackbar'
 import Stack from '@mui/material/Stack'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+import Chip from '@mui/material/Chip'
 import ThemeToggle from './ThemeToggle.jsx'
 import logo from '../assets/logo.svg'
 
-// Centralized API config. Values come from Vite env vars (see .env.example)
-// so the same code can point at different backends per environment.
 export const API_GENERATE_URL = import.meta.env.VITE_API_GENERATE_URL
 export const API_COMPOSE_URL = import.meta.env.VITE_API_COMPOSE_URL
 
-if (!API_GENERATE_URL || !API_COMPOSE_URL) {
-  console.warn(
-    'Missing VITE_API_GENERATE_URL / VITE_API_COMPOSE_URL — check your .env file.'
-  )
-}
-export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }) {
-  const [mode, setMode] = useState('reply') // 'reply' | 'compose'
+const TONES = [
+  { value: '', label: 'Neutral & Natural' },
+  { value: 'professional', label: 'Professional' },
+  { value: 'formal', label: 'Executive Formal' },
+  { value: 'friendly', label: 'Warm & Friendly' },
+  { value: 'informal', label: 'Concise & Casual' },
+]
 
-  // reply fields
+export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }) {
+  const [mode, setMode] = useState('reply')
   const [emailContent, setEmailContent] = useState('')
-  // compose fields
   const [recipientEmail, setRecipientEmail] = useState('')
   const [subject, setSubject] = useState('')
   const [additionalContext, setAdditionalContext] = useState('')
-
-  // shared
   const [tone, setTone] = useState('')
   const [generatedReply, setGeneratedReply] = useState('')
   const [loading, setLoading] = useState(false)
@@ -75,7 +72,7 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
       const reply = await response.text()
       setGeneratedReply(reply)
     } catch (err) {
-      setError('Could not generate a reply. Check that the server is running and try again.')
+      setError('Could not generate a reply. Ensure your backend server is active.')
       console.error(err)
     } finally {
       setLoading(false)
@@ -100,154 +97,201 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
   const canSubmit = mode === 'compose' ? !!subject : !!emailContent
 
   return (
-    <Box className="generator-shell">
-      <Box component="nav" className="generator-nav">
-        <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5, gap: 1 }}>
-          <Button onClick={onBack} size="small" sx={{ flexShrink: 0 }}>
-            ← Back
+    <Box sx={{ minHeight: '100vh', pb: 8 }}>
+      {/* App Navbar */}
+      <Box component="nav" className="nav-glass">
+        <Container maxWidth="md" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5 }}>
+          <Button onClick={onBack} size="small" sx={{ color: 'text.secondary' }}>
+            ← Back to Home
           </Button>
-          <Stack direction="row" alignItems="center" spacing={1.25} sx={{ minWidth: 0 }}>
-            <Box component="img" src={logo} alt="" sx={{ width: 24, height: 24, borderRadius: '5px', display: 'block', flexShrink: 0 }} />
-            <Typography
-              noWrap
-              sx={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.9rem',
-                color: 'var(--color-ink)',
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              smart-email-assistant
+          <Stack direction="row" alignItems="center" spacing={1.25}>
+            <Box component="img" src={logo} alt="" sx={{ width: 28, height: 28, borderRadius: '8px' }} />
+            <Typography variant="h6" sx={{ fontSize: '0.95rem', fontWeight: 700 }}>
+              Smart Assistant
             </Typography>
           </Stack>
-          <Box sx={{ flexShrink: 0 }}>
-            <ThemeToggle mode={themeMode} onToggle={onToggleMode} />
-          </Box>
+          <ThemeToggle mode={themeMode} onToggle={onToggleMode} />
         </Container>
       </Box>
 
-      <Container maxWidth="md" sx={{ py: { xs: 4, sm: 6, md: 8 } }}>
-        <Typography variant="h1" sx={{ fontSize: { xs: '1.35rem', sm: '1.65rem', md: '1.9rem' }, mb: 1 }}>
-          {mode === 'compose' ? 'Compose an email' : 'Generate a reply'}
-        </Typography>
-        <Typography sx={{ color: 'var(--color-muted)', mb: 3, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
-          {mode === 'compose'
-            ? 'Fill in the recipient and subject, and get a draft you can send.'
-            : 'Paste the email below, pick a tone if you want one, and get a draft you can send.'}
-        </Typography>
+      <Container maxWidth="md" sx={{ pt: { xs: 4, md: 6 } }}>
+        {/* Title & Mode Switcher */}
+        <Box sx={{ mb: 4, textAlign: 'center' }}>
+          <Typography variant="h1" sx={{ fontSize: { xs: '1.8rem', md: '2.2rem' }, mb: 1 }}>
+            {mode === 'compose' ? 'Compose New Email' : 'Reply with Context'}
+          </Typography>
+          <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem', maxWidth: 480, mx: 'auto' }}>
+            {mode === 'compose'
+              ? 'Provide the key details and let the assistant craft a ready-to-send draft.'
+              : 'Paste what landed in your inbox to get an intelligent, tailored response.'}
+          </Typography>
+        </Box>
 
-        <Tabs value={mode} onChange={handleModeChange} variant="fullWidth" sx={{ mb: 3 }}>
-          <Tab value="reply" label="Reply" />
-          <Tab value="compose" label="Compose" />
-        </Tabs>
+        {/* Segmented Mode Selector */}
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+          <Tabs
+            value={mode}
+            onChange={handleModeChange}
+            sx={{
+              background: 'var(--bg-surface)',
+              p: 0.5,
+              borderRadius: '12px',
+              border: '1px solid var(--border-subtle)',
+              '& .MuiTabs-indicator': {
+                height: '100%',
+                borderRadius: '8px',
+                backgroundColor: 'primary.main',
+                opacity: 0.15,
+              },
+            }}
+          >
+            <Tab value="reply" label="⚡ Reply to Thread" sx={{ textTransform: 'none', fontWeight: 600, minHeight: 42 }} />
+            <Tab value="compose" label="✍️ Compose Fresh" sx={{ textTransform: 'none', fontWeight: 600, minHeight: 42 }} />
+          </Tabs>
+        </Box>
 
-        <Box className="generator-card">
+        {/* Input Card Form */}
+        <Box className="glass-card" sx={{ p: { xs: 3, md: 4 } }}>
           {mode === 'compose' ? (
-            <>
+            <Stack spacing={2.5}>
               <TextField
                 fullWidth
-                variant="outlined"
-                label="Recipient email"
+                label="Recipient Email (Optional)"
+                placeholder="client@acme.com"
                 value={recipientEmail}
                 onChange={(e) => setRecipientEmail(e.target.value)}
-                sx={{ mb: 3 }}
               />
               <TextField
                 fullWidth
-                variant="outlined"
-                label="Subject"
+                required
+                label="Subject Line"
+                placeholder="Q3 Roadmap review & sprint alignment"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                sx={{ mb: 3 }}
               />
               <TextField
                 fullWidth
                 multiline
                 rows={4}
-                variant="outlined"
-                label="Additional context (optional)"
+                label="Context & Key Points to Include"
+                placeholder="Mention that design deliverables are delayed by 2 days, but overall milestone remains on track..."
                 value={additionalContext}
                 onChange={(e) => setAdditionalContext(e.target.value)}
-                sx={{ mb: 3 }}
               />
-            </>
+            </Stack>
           ) : (
             <TextField
               fullWidth
               multiline
               rows={7}
-              variant="outlined"
-              label="Original email content"
+              label="Inbound Email Thread"
+              placeholder="Paste the message or full email thread here..."
               value={emailContent}
               onChange={(e) => setEmailContent(e.target.value)}
-              sx={{ mb: 3 }}
             />
           )}
 
-          <FormControl fullWidth sx={{ mb: 3 }}>
-            <InputLabel id="tone-label">Tone (optional)</InputLabel>
-            <Select
-              labelId="tone-label"
-              label="Tone (optional)"
-              value={tone}
-              onChange={(e) => setTone(e.target.value)}
-            >
-              <MenuItem value="">None</MenuItem>
-              <MenuItem value="formal">Formal</MenuItem>
-              <MenuItem value="informal">Informal</MenuItem>
-              <MenuItem value="friendly">Friendly</MenuItem>
-              <MenuItem value="professional">Professional</MenuItem>
-            </Select>
-          </FormControl>
+          {/* Tone Selector & Quick Preset Chips */}
+          <Box sx={{ mt: 3, mb: 3 }}>
+            <FormControl fullWidth sx={{ mb: 1.5 }}>
+              <InputLabel id="tone-label">Tone Calibration</InputLabel>
+              <Select
+                labelId="tone-label"
+                label="Tone Calibration"
+                value={tone}
+                onChange={(e) => setTone(e.target.value)}
+              >
+                {TONES.map((t) => (
+                  <MenuItem key={t.value} value={t.value}>
+                    {t.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+              {TONES.map((t) => (
+                <Chip
+                  key={t.value}
+                  label={t.label}
+                  size="small"
+                  clickable
+                  variant={tone === t.value ? 'filled' : 'outlined'}
+                  color={tone === t.value ? 'primary' : 'default'}
+                  onClick={() => setTone(t.value)}
+                  sx={{ borderRadius: '6px' }}
+                />
+              ))}
+            </Stack>
+          </Box>
+
+          {/* Action Row */}
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 3 }}>
             <Button
               variant="contained"
               color="secondary"
+              size="large"
               onClick={handleSubmit}
               disabled={!canSubmit || loading}
               fullWidth
+              sx={{ py: 1.4 }}
             >
               {loading ? (
                 <CircularProgress size={22} sx={{ color: '#fff' }} />
               ) : mode === 'compose' ? (
-                'Compose email'
+                'Generate Email Draft'
               ) : (
-                'Generate reply'
+                'Generate Intelligent Reply'
               )}
             </Button>
             {(emailContent || recipientEmail || subject || additionalContext || generatedReply) && !loading && (
-              <Button variant="text" onClick={handleReset} sx={{ width: { xs: '100%', sm: 'auto' }, flexShrink: 0 }}>
-                Clear
+              <Button variant="outlined" onClick={handleReset} sx={{ color: 'text.secondary', borderColor: 'divider' }}>
+                Reset
               </Button>
             )}
           </Stack>
         </Box>
 
+        {/* Error Feedback */}
         {error && (
-          <Alert severity="error" sx={{ mt: 3 }}>
+          <Alert severity="error" sx={{ mt: 3, borderRadius: 2 }}>
             {error}
           </Alert>
         )}
 
+        {/* Output Area */}
         {generatedReply && (
           <Box sx={{ mt: 5 }}>
-            <Typography variant="h4" sx={{ fontSize: '1.05rem', mb: 2 }}>
-              {mode === 'compose' ? 'Generated email' : 'Generated reply'}
-            </Typography>
-            <Box className="generator-card">
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>
+              <Typography variant="h4" sx={{ fontSize: '1.1rem' }}>
+                Generated Output
+              </Typography>
+              <Chip label="Ready to Send" color="success" size="small" sx={{ fontWeight: 600 }} />
+            </Box>
+            <Box className="glass-card" sx={{ p: { xs: 3, md: 4 } }}>
               <TextField
                 fullWidth
                 multiline
-                rows={7}
-                variant="outlined"
+                rows={8}
                 value={generatedReply}
                 slotProps={{ input: { readOnly: true } }}
-                sx={{ mb: 2 }}
+                sx={{
+                  mb: 2.5,
+                  '& .MuiOutlinedInput-root': {
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '1rem',
+                    lineHeight: 1.6,
+                  },
+                }}
               />
-              <Button variant="outlined" onClick={handleCopy} sx={{ width: { xs: '100%', sm: 'auto' } }}>
-                Copy to clipboard
-              </Button>
+              <Stack direction="row" spacing={2}>
+                <Button variant="contained" color="secondary" onClick={handleCopy}>
+                  {copied ? '✓ Copied to Clipboard' : 'Copy Draft'}
+                </Button>
+                <Button variant="outlined" onClick={handleSubmit} sx={{ borderColor: 'divider', color: 'text.secondary' }}>
+                  Regenerate
+                </Button>
+              </Stack>
             </Box>
           </Box>
         )}
@@ -255,9 +299,9 @@ export default function EmailGenerator({ onBack, mode: themeMode, onToggleMode }
 
       <Snackbar
         open={copied}
-        autoHideDuration={2000}
+        autoHideDuration={2500}
         onClose={() => setCopied(false)}
-        message="Copied to clipboard"
+        message="Draft successfully copied to clipboard"
       />
     </Box>
   )

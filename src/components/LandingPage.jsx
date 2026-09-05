@@ -4,37 +4,39 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import ThemeToggle from './ThemeToggle.jsx'
+import HeroScene from './HeroScene.jsx'
 import logo from '../assets/logo.svg'
 
-function NibIcon(props) {
+function SparkIcon(props) {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M12 3 4 17l-1 4 4-1L21 6a2.1 2.1 0 0 0-3-3Z" />
-      <path d="M13.5 5.5 18 10" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z" />
     </svg>
   )
 }
 
-function ThreadIcon(props) {
+function LayersIcon(props) {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M7 12v5a3 3 0 0 0 6 0V7a2 2 0 1 1 4 0v9" />
-      <circle cx="7" cy="9" r="2" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.9a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z" />
+      <path d="m22 12.5-8.58 3.9a2 2 0 0 1-1.66 0L2 12.5" />
+      <path d="m22 17.5-8.58 3.9a2 2 0 0 1-1.66 0L2 17.5" />
     </svg>
   )
 }
 
-function SendIcon(props) {
+function SendFastIcon(props) {
   return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <path d="M3 11.5 20 4l-7 17-3-7-7-2.5Z" />
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M22 2 11 13" />
+      <path d="m22 2-7 20-4-9-9-4Z" />
     </svg>
   )
 }
 
 function ExtensionIcon(props) {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M9 4h4a1 1 0 0 1 1 1v2.2a1.8 1.8 0 1 0 0 3.6V13a1 1 0 0 1-1 1h-2.2a1.8 1.8 0 1 1-3.6 0H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2.2a1.8 1.8 0 1 0 3.6 0V5a1 1 0 0 1 1-1Z" />
     </svg>
   )
@@ -42,127 +44,138 @@ function ExtensionIcon(props) {
 
 const features = [
   {
-    icon: NibIcon,
-    title: 'Match any tone',
-    body: 'Formal for the client, casual for the team. Pick a tone and the draft follows it.',
+    icon: SparkIcon,
+    title: 'Adaptive Voice & Tone',
+    body: 'Seamlessly shift between executive formal, peer friendly, concise bulleted, or consultative tones with zero boilerplate.',
   },
   {
-    icon: ThreadIcon,
-    title: 'Keep the context',
-    body: 'Paste the whole thread. The reply responds to what was actually asked, not a generic template.',
+    icon: LayersIcon,
+    title: 'Deep Thread Context',
+    body: 'Paste messy, multi-turn email conversations. The engine extracts the true underlying request and addresses each point accurately.',
   },
   {
-    icon: SendIcon,
-    title: 'Ready to send',
-    body: 'No filler, no clichés. A draft you can send as-is, or tweak in a few seconds.',
+    icon: SendFastIcon,
+    title: 'Instant Ready-to-Send Drafts',
+    body: 'No robotic greetings, no awkward pleasantries. Polished, high-impact emails ready for one-click review and dispatch.',
   },
 ]
 
 const steps = [
-  { n: '01', title: 'Paste the email', body: "Drop in the message you're replying to, thread and all." },
-  { n: '02', title: 'Choose a tone', body: 'Formal, friendly, informal, or professional. Optional.' },
-  { n: '03', title: 'Copy the reply', body: 'Read it once, send it, or adjust a line and move on.' },
-]
-
-const installSteps = [
-  { n: '01', title: 'Download the extension', body: 'Get the .zip above and unzip it anywhere on your computer.' },
-  { n: '02', title: 'Open chrome://extensions', body: 'Turn on Developer mode using the toggle in the top right.' },
-  { n: '03', title: 'Click "Load unpacked"', body: 'Select the unzipped folder. The AI button appears in Gmail.' },
+  { n: '01', title: 'Feed the Context', body: 'Paste the incoming email thread or outline your recipient and objectives.' },
+  { n: '02', title: 'Calibrate Tone', body: 'Select professional, friendly, formal, or let the assistant infer the nuance.' },
+  { n: '03', title: 'Copy & Send', body: 'Instant draft delivery with clean layout, natural phrasing, and zero fluff.' },
 ]
 
 export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
   return (
-    <Box>
-      <Box component="nav" className="nav-bar">
-        <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.5, gap: 1 }}>
-          <Stack direction="row" alignItems="center" spacing={{ xs: 0.75, sm: 1.25 }} sx={{ minWidth: 0 }}>
-            <Box component="img" src={logo} alt="" className="nav-mark" sx={{ flexShrink: 0 }} />
-            <Typography
-              noWrap
-              sx={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '0.95rem',
-                color: 'var(--color-ink)',
-                display: { xs: 'none', sm: 'block' },
-              }}
-            >
-              smart-email-assistant
+    <Box sx={{ position: 'relative', overflowX: 'hidden' }}>
+      {/* Top Navbar */}
+      <Box component="nav" className="nav-glass">
+        <Container maxWidth="lg" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', py: 1.75 }}>
+          <Stack direction="row" alignItems="center" spacing={1.5}>
+            <Box component="img" src={logo} alt="Smart Email Assistant" sx={{ width: 34, height: 34, display: 'block' }} />
+            <Typography variant="h6" sx={{ fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.02em' }}>
+              Smart Email Assistant
             </Typography>
           </Stack>
-          <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1 }} sx={{ flexShrink: 0 }}>
+          <Stack direction="row" alignItems="center" spacing={1.5}>
             <ThemeToggle mode={mode} onToggle={onToggleMode} />
             <Button
               component="a"
               href="#extension"
               variant="text"
-              color="primary"
-              size="small"
               startIcon={<ExtensionIcon />}
-              sx={{ display: { xs: 'none', sm: 'inline-flex' } }}
+              sx={{ display: { xs: 'none', sm: 'inline-flex' }, color: 'text.secondary' }}
             >
-              Chrome extension
+              Extension
             </Button>
-            <Button variant="outlined" color="primary" onClick={onGetStarted} size="small">
-              Open app
+            <Button variant="contained" color="secondary" onClick={onGetStarted}>
+              Launch App
             </Button>
           </Stack>
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ pt: { xs: 5, sm: 7, md: 10 }, pb: { xs: 7, sm: 9, md: 12 } }}>
-        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, sm: 6, md: 5 }, alignItems: 'center' }}>
-          <Box sx={{ flex: '1 1 50%', width: '100%' }}>
-            <Typography className="eyebrow">draft → reply</Typography>
-            <Typography variant="h1" sx={{ fontSize: { xs: '1.9rem', sm: '2.3rem', md: '2.7rem' }, lineHeight: 1.15, mb: 3 }}>
-              Turn any email into the reply you'd actually send.
-            </Typography>
-            <Typography sx={{ color: 'var(--color-muted)', fontSize: { xs: '1rem', md: '1.05rem' }, maxWidth: 460, mb: 4 }}>
-              Paste in what landed in your inbox, pick a tone, and get a clean, ready-to-send draft in seconds.
-              No blank cursor, no re-reading it five times.
-            </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              size="large"
-              onClick={onGetStarted}
-              sx={{ width: { xs: '100%', sm: 'auto' } }}
-            >
-              Try it free
-            </Button>
-          </Box>
+      {/* Hero Section with Interactive 3D Three.js Scene */}
+      <Box sx={{ position: 'relative', pt: { xs: 8, sm: 10, md: 14 }, pb: { xs: 8, sm: 10, md: 14 } }}>
+        <Container maxWidth="lg">
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.1fr 0.9fr' }, gap: 6, alignItems: 'center' }}>
+            <Box sx={{ zIndex: 1 }}>
+              <Box className="hero-pill">
+                <span>✨</span> Next-Gen AI Email Intelligence
+              </Box>
+              <Typography variant="h1" sx={{ fontSize: { xs: '2.4rem', sm: '3.2rem', md: '3.8rem' }, lineHeight: 1.1, mb: 2.5 }}>
+                Master your inbox <br />
+                <span className="gradient-headline">in your exact voice.</span>
+              </Typography>
+              <Typography sx={{ color: 'text.secondary', fontSize: { xs: '1.05rem', md: '1.15rem' }, lineHeight: 1.6, maxWidth: 520, mb: 4 }}>
+                Transform complex threads into clear, persuasive, context-aware responses in seconds. Built for developers, leaders, and high-velocity teams.
+              </Typography>
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                <Button variant="contained" color="secondary" size="large" onClick={onGetStarted}>
+                  Start Generating Free →
+                </Button>
+                <Button
+                  component="a"
+                  href="#extension"
+                  variant="outlined"
+                  size="large"
+                  startIcon={<ExtensionIcon />}
+                  sx={{ borderColor: 'divider', color: 'text.primary' }}
+                >
+                  Get Chrome Extension
+                </Button>
+              </Stack>
+            </Box>
 
-          <Box sx={{ flex: '1 1 50%', width: '100%' }}>
-            <Box className="redline-card">
-              <Box className="redline-card-head">Re: quarterly numbers</Box>
-              <Box className="redline-card-body">
-                <Typography className="redline-before">
-                  hey can u send me the info asap, kinda swamped rn
-                </Typography>
-                <Typography className="redline-after">
-                  Hi Sam — happy to send that over. Could you confirm the deadline you're working with?
-                </Typography>
+            {/* Interactive Three.js or Dynamic Transformation Preview Card */}
+            <Box sx={{ position: 'relative', minHeight: 420 }}>
+              <Box className="hero-scene-container">
+                <HeroScene mode={mode} />
+              </Box>
+              <Box className="comparison-card" sx={{ position: 'relative', zIndex: 2, mt: { xs: 0, md: 2 } }}>
+                <Box className="comparison-header">
+                  <Typography sx={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'text.secondary' }}>
+                    <span className="status-dot" /> LIVE INFERENCE DEMO
+                  </Typography>
+                  <Typography sx={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'primary.main' }}>
+                    Model: Gemini Flash
+                  </Typography>
+                </Box>
+                <Box className="sample-incoming">
+                  <strong>Thread Context:</strong> "Hey, can you review the sprint deployment notes and let me know if we can ship by 3 PM?"
+                </Box>
+                <Box className="sample-outgoing">
+                  "Hi Sarah — I’ve reviewed the staging logs. The API migration is green and test coverage passed. We’re on schedule to deploy at 3:00 PM EST. I’ll monitor the release channels directly."
+                </Box>
               </Box>
             </Box>
           </Box>
-        </Box>
-      </Container>
+        </Container>
+      </Box>
 
-      <Box sx={{ background: 'var(--color-paper-alt)', py: { xs: 7, sm: 8, md: 10 } }}>
+      {/* Feature Grid */}
+      <Box sx={{ py: { xs: 8, md: 12 }, borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
         <Container maxWidth="lg">
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-              gap: { xs: 3, sm: 4 },
-            }}
-          >
+          <Box sx={{ textAlign: 'center', mb: 7 }}>
+            <Typography variant="h2" sx={{ fontSize: { xs: '1.8rem', md: '2.3rem' }, mb: 1.5 }}>
+              Engineered for absolute clarity
+            </Typography>
+            <Typography sx={{ color: 'text.secondary', maxWidth: 500, mx: 'auto' }}>
+              Eliminate writer's block with contextual awareness that feels written by your sharpest self.
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 3.5 }}>
             {features.map(({ icon: Icon, title, body }) => (
-              <Box key={title} className="feature-card">
-                <Icon className="feature-icon" />
-                <Typography variant="h4" sx={{ fontSize: '1.05rem', mt: 2, mb: 1 }}>
+              <Box key={title} className="glass-card" sx={{ p: 3.5 }}>
+                <Box sx={{ color: 'primary.main', mb: 2 }}>
+                  <Icon />
+                </Box>
+                <Typography variant="h4" sx={{ fontSize: '1.2rem', mb: 1.25 }}>
                   {title}
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
+                <Typography sx={{ color: 'text.secondary', fontSize: '0.92rem', lineHeight: 1.6 }}>
                   {body}
                 </Typography>
               </Box>
@@ -171,27 +184,19 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 7, sm: 9, md: 12 } }}>
-        <Typography className="eyebrow" sx={{ textAlign: 'center' }}>
-          the process
+      {/* Process Steps */}
+      <Container maxWidth="lg" sx={{ py: { xs: 9, md: 14 } }}>
+        <Typography variant="h2" sx={{ fontSize: { xs: '1.7rem', md: '2.2rem' }, textAlign: 'center', mb: 6 }}>
+          Three clicks to zero inbox
         </Typography>
-        <Typography variant="h2" sx={{ fontSize: { xs: '1.4rem', sm: '1.7rem', md: '1.9rem' }, textAlign: 'center', mb: { xs: 4, md: 6 } }}>
-          How it works
-        </Typography>
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
-            gap: { xs: 3, sm: 4 },
-          }}
-        >
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' }, gap: 4 }}>
           {steps.map((step) => (
-            <Box key={step.n} className="step-card">
-              <Typography className="step-number">{step.n}</Typography>
-              <Typography variant="h4" sx={{ fontSize: '1.05rem', mb: 1 }}>
+            <Box key={step.n} className="glass-card" sx={{ p: 3.5 }}>
+              <Box className="step-index-badge">{step.n}</Box>
+              <Typography variant="h4" sx={{ fontSize: '1.15rem', mb: 1 }}>
                 {step.title}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
+              <Typography sx={{ color: 'text.secondary', fontSize: '0.92rem', lineHeight: 1.6 }}>
                 {step.body}
               </Typography>
             </Box>
@@ -199,86 +204,69 @@ export default function LandingPage({ onGetStarted, mode, onToggleMode }) {
         </Box>
       </Container>
 
-      <Box id="extension" sx={{ background: 'var(--color-paper-alt)', py: { xs: 7, sm: 8, md: 10 } }}>
+      {/* Chrome Extension Section */}
+      <Box id="extension" sx={{ py: { xs: 8, md: 12 }, background: 'rgba(99, 102, 241, 0.03)' }}>
         <Container maxWidth="lg">
-          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: { xs: 5, md: 6 }, alignItems: 'center' }}>
-            <Box sx={{ flex: '1 1 55%' }}>
-              <Typography className="eyebrow">also available</Typography>
-              <Typography variant="h2" sx={{ fontSize: { xs: '1.45rem', sm: '1.7rem', md: '2rem' }, mb: 2 }}>
-                Works right inside Gmail.
-              </Typography>
-              <Typography sx={{ color: 'var(--color-muted)', fontSize: { xs: '1rem', md: '1.05rem' }, maxWidth: 460, mb: 3 }}>
-                Install the Chrome extension and a single "AI Reply" button appears in Gmail's compose
-                toolbar. No switching tabs, no copy-pasting between windows. Not on the Chrome Web
-                Store yet — it's a quick manual install, three steps below.
-              </Typography>
-              <Button
-                component="a"
-                href="/smart-email-assistant-extension.zip"
-                download
-                variant="contained"
-                color="secondary"
-                size="large"
-                startIcon={<ExtensionIcon />}
-                sx={{ width: { xs: '100%', sm: 'auto' } }}
-              >
-                Download extension (.zip)
-              </Button>
-            </Box>
-
-            <Box sx={{ flex: '1 1 45%', width: '100%' }}>
-              <Box className="redline-card">
-                <Box className="redline-card-head">Compose — Re: quarterly numbers</Box>
-                <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5, flexWrap: 'wrap' }}>
-                  <Box className="mock-toolbar-button">
-                    <ExtensionIcon />
-                    <span>AI Reply</span>
-                  </Box>
-                  <Box sx={{ width: 22, height: 22, borderRadius: '50%', border: '1.5px solid var(--color-border)' }} />
-                  <Box sx={{ width: 22, height: 22, borderRadius: '50%', border: '1.5px solid var(--color-border)' }} />
-                </Box>
+          <Box className="glass-card" sx={{ p: { xs: 4, sm: 6, md: 8 } }}>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1.2fr 0.8fr' }, gap: 5, alignItems: 'center' }}>
+              <Box>
+                <Typography className="hero-pill">Gmail Native Integration</Typography>
+                <Typography variant="h2" sx={{ fontSize: { xs: '1.8rem', md: '2.3rem' }, mb: 2 }}>
+                  Compose inside Gmail without tab hopping.
+                </Typography>
+                <Typography sx={{ color: 'text.secondary', lineHeight: 1.7, mb: 4 }}>
+                  Install the Chrome extension to inject an AI action pill straight into the Gmail editor. Draft replies in-situ using keyboard shortcuts.
+                </Typography>
+                <Button
+                  component="a"
+                  href="/smart-email-assistant-extension.zip"
+                  download
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  startIcon={<ExtensionIcon />}
+                >
+                  Download Extension (.zip)
+                </Button>
+              </Box>
+              <Box sx={{ p: 3, borderRadius: 3, border: '1px solid var(--border-subtle)', background: 'var(--bg-surface-elevated)' }}>
+                <Typography sx={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'primary.main', mb: 2 }}>
+                  // Quick Install Guide
+                </Typography>
+                <Typography sx={{ fontSize: '0.9rem', color: 'text.secondary', mb: 1.5 }}>
+                  <strong>1.</strong> Extract the downloaded <code>.zip</code> folder.
+                </Typography>
+                <Typography sx={{ fontSize: '0.9rem', color: 'text.secondary', mb: 1.5 }}>
+                  <strong>2.</strong> Navigate to <code>chrome://extensions</code> & toggle <strong>Developer mode</strong>.
+                </Typography>
+                <Typography sx={{ fontSize: '0.9rem', color: 'text.secondary' }}>
+                  <strong>3.</strong> Click <strong>Load unpacked</strong> and select the unzipped directory.
+                </Typography>
               </Box>
             </Box>
-          </Box>
-
-          <Box sx={{ mt: { xs: 6, md: 8 }, display: 'grid', gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' }, gap: 3 }}>
-            {installSteps.map((step) => (
-              <Box key={step.n} className="step-card">
-                <Typography className="step-number" sx={{ fontSize: '1.5rem' }}>
-                  {step.n}
-                </Typography>
-                <Typography variant="h4" sx={{ fontSize: '0.95rem', mb: 0.5 }}>
-                  {step.title}
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
-                  {step.body}
-                </Typography>
-              </Box>
-            ))}
           </Box>
         </Container>
       </Box>
 
-      <Box className="cta-band">
-        <Container maxWidth="md" sx={{ textAlign: 'center', py: { xs: 7, sm: 8, md: 10 } }}>
-          <Typography variant="h2" sx={{ fontSize: { xs: '1.4rem', sm: '1.7rem', md: '2rem' }, color: '#FFFFFF', mb: 3 }}>
-            Stop staring at the cursor.
+      {/* Bottom CTA Glow Banner */}
+      <Container maxWidth="md" sx={{ py: { xs: 8, md: 12 } }}>
+        <Box className="cta-glow-container">
+          <Typography variant="h2" sx={{ fontSize: { xs: '1.8rem', sm: '2.4rem' }, mb: 2 }}>
+            Never let an email stall your momentum.
           </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            onClick={onGetStarted}
-            sx={{ width: { xs: '100%', sm: 'auto' } }}
-          >
-            Open the generator
+          <Typography sx={{ color: 'text.secondary', mb: 4, maxWidth: 460, mx: 'auto' }}>
+            Transform inbound communication into decisive, well-articulated answers in seconds.
+          </Typography>
+          <Button variant="contained" color="secondary" size="large" onClick={onGetStarted}>
+            Launch Email Generator Now
           </Button>
-        </Container>
-      </Box>
+        </Box>
+      </Container>
 
-      <Box component="footer" sx={{ py: 4, px: 2, textAlign: 'center' }}>
-        <Typography variant="body2" sx={{ color: 'var(--color-muted)' }}>
-          Smart Email Assistant — built to get you out of your inbox faster.
+      {/* Footer */}
+      <Box component="footer" sx={{ py: 4, textAlign: 'center', borderTop: '1px solid var(--border-subtle)' }}>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          Smart Email Assistant © 2026. Built with speed, precision, and modern intelligence.
         </Typography>
       </Box>
     </Box>
